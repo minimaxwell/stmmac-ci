@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>test report</title>
+<style>
+body{margin:0;padding:24px;font:14px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;color:#1c1c1e;background:#fff}
+h1{font-size:17px;margin:0 0 10px}
+nav.toc{margin:0 0 14px;padding:6px 0;border-top:1px solid #d9d9de;border-bottom:1px solid #d9d9de;font-size:13px}
+nav.toc a{display:inline-block;margin-right:14px;color:#1c1c1e;text-decoration:none;border-bottom:2px solid #b8b8c0;padding:2px 0}
+nav.toc a:hover{border-bottom-color:#1c1c1e}
+details.grid{margin:28px 0 0;padding:0 0 12px;border-top:3px solid #b8b8c0}
+details.grid>summary{font-size:16px;font-weight:600;cursor:pointer;padding:8px 10px;margin:0 0 6px;list-style:none;background:#eeeef1}
+details.grid>summary::before{content:"▸";display:inline-block;width:1em;color:#8a8a92}
+details.grid[open]>summary::before{content:"▾"}
+h3{font-size:14px;margin:18px 0 4px}
+a.anchor{color:#8a8a92;text-decoration:none;font-weight:400;font-size:12px;margin-left:8px;border-bottom:1px solid #b8b8c0}
+a.anchor:hover{color:#1c1c1e}
+.how{display:inline-block;margin:0 0 6px;padding:8px 12px;border:1px solid #d9d9de;background:#f6f6f8;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre}
+.meta{color:#5c5c62;margin:0 0 8px}
+.meta code{font:12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:#f1f1f3;padding:1px 4px}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;font-size:13px;line-height:1.25}
+th,td{border:1px solid #d9d9de;padding:1px 4px;text-align:center;white-space:nowrap}
+th.lbl,td.lbl{text-align:left;font-weight:400;background:#f6f6f8;position:sticky;left:0;line-height:1.2}
+td.lbl b{font-weight:600}
+td.lbl small{font-size:12px;color:#5c5c62}
+td.lbl.note{color:#8a1c1c}
+thead th{background:#f6f6f8}
+thead th.diag{min-width:2.6em;padding:0;border:none;background:none;vertical-align:bottom;position:relative}
+thead th.diag>div{position:absolute;left:100%;bottom:0;transform-origin:0 100%;transform:rotate(-45deg);user-select:all;white-space:nowrap;text-align:left;font-size:13px;line-height:1.2;padding:0 .6em .15em .3em;border-bottom:1px solid #b8b8c0}
+thead th.diag b{font-weight:600}
+thead th.diag small{font-size:12px;color:#5c5c62}
+th.pad,td.pad{border:none;background:none;min-width:13em}
+td.ok{background:#dff5e3;color:#155724}
+td.na{background:#f1f1f3;color:#6b6b73}
+td.bad{background:#fbe0e0;color:#8a1c1c;font-weight:600}
+td.skip{background:#fff4d6;color:#7a5a00}
+td.miss{color:#b0b0b8}
+td.rg{outline:2px solid #c0392b;outline-offset:-2px}
+td.fx{outline:2px solid #1e8449;outline-offset:-2px}
+td.ch{outline:2px solid #b9770e;outline-offset:-2px}
+td.new,td.gone,td.weak{outline:2px dashed #9a9aa2;outline-offset:-2px}
+td .was{color:#8a8a92;font-weight:400}
+details.series{margin:12px 0 0;border:1px solid #d9d9de}
+details.series>summary{cursor:pointer;padding:6px 10px;list-style:none;background:#f6f6f8}
+details.series>summary .v{color:#5c5c62;font-weight:400;margin-left:6px}
+details.series>summary .sum{float:right;font-weight:400;color:#5c5c62}
+details.series>.body{padding:4px 10px 10px}
+details.series a{color:#1c1c1e}
+details.fold{margin:8px 0 0}
+details.fold>summary{cursor:pointer;font-size:13px;color:#3a3a40;list-style:none}
+details.fold>summary::before{content:"▸";display:inline-block;width:1em;color:#8a8a92}
+details.fold[open]>summary::before{content:"▾"}
+nav.site{margin:0 0 14px;padding:6px 10px;background:#eeeef1;font-size:13px}nav.site a{color:#1c1c1e;text-decoration:none;border-bottom:2px solid #b8b8c0;padding:2px 0;margin-right:12px}nav.site b{margin-right:12px}nav.site .day{float:right;color:#5c5c62}nav.site .day a{margin:0 0 0 8px}</style></head><body><nav class="site"><b>tests</b> <a href="series.html">series</a> <a href="../../history.html">history</a> <a href="../../index.html">latest</a><span class="day">2026-09-05 <a href="../2026-09-06/grids.html">2026-09-06 &rsaquo;</a></span></nav>
+<h1>test report</h1>
+<nav class="toc"><a href="#g-stmmac-selftests">stmmac selftests</a><a href="#g-timestamping-cfg">timestamping cfg</a></nav>
+<details class="grid" id="g-stmmac-selftests" open><summary>stmmac selftests</summary>
+<pre class="how">Run tests with:
+ip link set eth0 up
+# wait for link to be up
+ethtool -t eth0</pre>
+<h3 id="g-stmmac-selftests-net-next">net-next <a class="anchor" href="#g-stmmac-selftests-net-next">permalink</a></h3>
+<p class="meta"><b>v7.3-rc1</b> &middot; <code>v7.3-rc1-364-g9eab111e7657</code> &middot; <code title="9eab111e765729e93087ff86a2ec9b2ae42d0fa5">9eab111e7657</code> &middot; interrupted</p>
+<div class="wrap"><table><thead><tr><th class="lbl"></th><th class="diag" style="height:12.0em"><div>MAC Loopback</div></th><th class="diag" style="height:12.0em"><div>MMC Counters</div></th><th class="diag" style="height:12.0em"><div>EEE</div></th><th class="diag" style="height:12.0em"><div>Hash Filter MC</div></th><th class="diag" style="height:12.0em"><div>Perfect Filter UC</div></th><th class="diag" style="height:12.0em"><div>MC Filter</div></th><th class="diag" style="height:12.0em"><div>UC Filter</div></th><th class="diag" style="height:12.0em"><div>Flow Control</div></th><th class="diag" style="height:12.0em"><div>RSS</div></th><th class="diag" style="height:12.0em"><div>VLAN Filtering</div></th><th class="diag" style="height:12.0em"><div>VLAN Filtering (perf)</div></th><th class="diag" style="height:12.0em"><div>Double VLAN Filter</div></th><th class="diag" style="height:12.0em"><div>Double VLAN Filter (perf)</div></th><th class="diag" style="height:12.0em"><div>Flexible RX Parser</div></th><th class="diag" style="height:12.0em"><div>SA Insertion (desc)</div></th><th class="diag" style="height:12.0em"><div>SA Replacement (desc)</div></th><th class="diag" style="height:12.0em"><div>SA Insertion (reg)</div></th><th class="diag" style="height:12.0em"><div>SA Replacement (reg)</div></th><th class="diag" style="height:12.0em"><div>VLAN TX Insertion</div></th><th class="diag" style="height:12.0em"><div>SVLAN TX Insertion</div></th><th class="diag" style="height:12.0em"><div>L3 DA Filtering</div></th><th class="diag" style="height:12.0em"><div>L3 SA Filtering</div></th><th class="diag" style="height:12.0em"><div>L4 DA TCP Filtering</div></th><th class="diag" style="height:12.0em"><div>L4 SA TCP Filtering</div></th><th class="diag" style="height:12.0em"><div>L4 DA UDP Filtering</div></th><th class="diag" style="height:12.0em"><div>L4 SA UDP Filtering</div></th><th class="diag" style="height:12.0em"><div>Jumbo Frame</div></th><th class="diag" style="height:12.0em"><div>Multichannel Jumbo</div></th><th class="diag" style="height:12.0em"><div>Split Header</div></th><th class="diag" style="height:12.0em"><div>TBS (ETF Scheduler)</div></th><th class="pad" style="min-width:15.5em"></th></tr></thead><tbody><tr><td class="lbl note" title="no run in this sweep
+amlogic,meson-g12a-dwmac, snps,dwmac-3.70a, snps,dwmac
+amlogic,sm1
+PHY: RTL8211F Gigabit Ethernet 0x001cc916
+PHY mode: rgmii-txid"><b>dwmac-meson8b</b><br><small>sm1 · RTL8211F</small></td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="pad"></td></tr>
+<tr><td class="lbl" title="nxp,imx8mp-dwmac-eqos, snps,dwmac-5.10a
+fsl,imx8mp
+PHY: Microchip KSZ9131 Gigabit PHY 0x00221642
+PHY mode: rgmii-id"><b>dwmac-imx</b><br><small>imx8mp · KSZ9131</small></td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="bad">-110</td><td class="bad">-110</td><td class="bad">-110</td><td class="bad">-110</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="bad">-110</td><td class="bad">-110</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+altr,socfpga-stmmac, snps,dwmac-3.70a, snps,dwmac
+altr,socfpga
+PHY: Micrel KSZ9031 Gigabit PHY 0x00221622
+PHY mode: rgmii"><b>dwmac-altr-socfpga</b><br><small>socfpga · KSZ9031</small></td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="pad"></td></tr>
+<tr><td class="lbl" title="qcom,ipq806x-gmac, snps,dwmac
+qcom,ipq8064
+PHY: -
+PHY mode: -"><b>dwmac-ipq806x</b><br><small>ipq8064</small></td><td class="bad">-110</td><td class="bad">-110</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="bad">-110</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="bad">-110</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="pad"></td></tr>
+<tr><td class="lbl" title="allwinner,sun8i-h3-emac
+allwinner,sun8i-h2-plus
+PHY: Generic PHY 0x00441400
+PHY mode: mii"><b>dwmac-sun8i</b><br><small>sun8i-h2-plus · Generic PHY</small></td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="bad">-110</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="bad">-110</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+st,stm32mp1-dwmac, snps,dwmac-4.20a
+st,stm32mp157
+PHY: RTL8211F Gigabit Ethernet 0x001cc916
+PHY mode: rgmii-id"><b>dwmac-stm32</b><br><small>stm32mp157 · RTL8211F</small></td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="pad"></td></tr>
+<tr><td class="lbl" title="starfive,jh7110-dwmac, snps,dwmac-5.20
+starfive,jh7110
+PHY: YT8531 Gigabit Ethernet 0x4f51e91b
+PHY mode: rgmii-id"><b>dwmac-starfive</b><br><small>jh7110 · YT8531</small></td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="bad">-110</td><td class="bad">-110</td><td class="bad">-110</td><td class="bad">-110</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="bad">-110</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no case ran: no link, or no answer in time
+compatible: not recorded
+starfive,jh7110
+PHY: YT8531S Gigabit Ethernet 0x4f51e91a
+PHY mode: gmii"><b>stmmac-pci + dwmac-motorcomm</b><br><small>jh7110 · YT8531S</small></td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="pad"></td></tr></tbody></table></div>
+<h3 id="g-stmmac-selftests-net">net <a class="anchor" href="#g-stmmac-selftests-net">permalink</a></h3>
+<p class="meta"><b>v7.3-rc1</b> &middot; <code>v7.3-rc1-271-g2b4707a149a5</code> &middot; <code title="2b4707a149a55e8fa75c9ef32b359d60f470a566">2b4707a149a5</code> &middot; interrupted</p>
+<div class="wrap"><table><thead><tr><th class="lbl"></th><th class="diag" style="height:12.0em"><div>MAC Loopback</div></th><th class="diag" style="height:12.0em"><div>MMC Counters</div></th><th class="diag" style="height:12.0em"><div>EEE</div></th><th class="diag" style="height:12.0em"><div>Hash Filter MC</div></th><th class="diag" style="height:12.0em"><div>Perfect Filter UC</div></th><th class="diag" style="height:12.0em"><div>MC Filter</div></th><th class="diag" style="height:12.0em"><div>UC Filter</div></th><th class="diag" style="height:12.0em"><div>Flow Control</div></th><th class="diag" style="height:12.0em"><div>RSS</div></th><th class="diag" style="height:12.0em"><div>VLAN Filtering</div></th><th class="diag" style="height:12.0em"><div>VLAN Filtering (perf)</div></th><th class="diag" style="height:12.0em"><div>Double VLAN Filter</div></th><th class="diag" style="height:12.0em"><div>Double VLAN Filter (perf)</div></th><th class="diag" style="height:12.0em"><div>Flexible RX Parser</div></th><th class="diag" style="height:12.0em"><div>SA Insertion (desc)</div></th><th class="diag" style="height:12.0em"><div>SA Replacement (desc)</div></th><th class="diag" style="height:12.0em"><div>SA Insertion (reg)</div></th><th class="diag" style="height:12.0em"><div>SA Replacement (reg)</div></th><th class="diag" style="height:12.0em"><div>VLAN TX Insertion</div></th><th class="diag" style="height:12.0em"><div>SVLAN TX Insertion</div></th><th class="diag" style="height:12.0em"><div>L3 DA Filtering</div></th><th class="diag" style="height:12.0em"><div>L3 SA Filtering</div></th><th class="diag" style="height:12.0em"><div>L4 DA TCP Filtering</div></th><th class="diag" style="height:12.0em"><div>L4 SA TCP Filtering</div></th><th class="diag" style="height:12.0em"><div>L4 DA UDP Filtering</div></th><th class="diag" style="height:12.0em"><div>L4 SA UDP Filtering</div></th><th class="diag" style="height:12.0em"><div>ARP Offload</div></th><th class="diag" style="height:12.0em"><div>Jumbo Frame</div></th><th class="diag" style="height:12.0em"><div>Multichannel Jumbo</div></th><th class="diag" style="height:12.0em"><div>Split Header</div></th><th class="diag" style="height:12.0em"><div>TBS (ETF Scheduler)</div></th><th class="pad" style="min-width:15.5em"></th></tr></thead><tbody><tr><td class="lbl note" title="no run in this sweep
+amlogic,meson-g12a-dwmac, snps,dwmac-3.70a, snps,dwmac
+amlogic,sm1
+PHY: RTL8211F Gigabit Ethernet 0x001cc916
+PHY mode: rgmii-txid"><b>dwmac-meson8b</b><br><small>sm1 · RTL8211F</small></td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="pad"></td></tr>
+<tr><td class="lbl" title="nxp,imx8mp-dwmac-eqos, snps,dwmac-5.10a
+fsl,imx8mp
+PHY: Microchip KSZ9131 Gigabit PHY 0x00221642
+PHY mode: rgmii-id"><b>dwmac-imx</b><br><small>imx8mp · KSZ9131</small></td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="bad">-110</td><td class="bad">-110</td><td class="bad">-110</td><td class="bad">-110</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="bad">-110</td><td class="bad">-110</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+altr,socfpga-stmmac, snps,dwmac-3.70a, snps,dwmac
+altr,socfpga
+PHY: Micrel KSZ9031 Gigabit PHY 0x00221622
+PHY mode: rgmii"><b>dwmac-altr-socfpga</b><br><small>socfpga · KSZ9031</small></td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+qcom,ipq806x-gmac, snps,dwmac
+qcom,ipq8064
+PHY: -
+PHY mode: -"><b>dwmac-ipq806x</b><br><small>ipq8064</small></td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="pad"></td></tr>
+<tr><td class="lbl" title="allwinner,sun8i-h3-emac
+allwinner,sun8i-h2-plus
+PHY: Generic PHY 0x00441400
+PHY mode: mii"><b>dwmac-sun8i</b><br><small>sun8i-h2-plus · Generic PHY</small></td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="bad">-110</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="bad">-110</td><td class="ok">ok</td><td class="ok">ok</td><td class="ok">ok</td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+st,stm32mp1-dwmac, snps,dwmac-4.20a
+st,stm32mp157
+PHY: RTL8211F Gigabit Ethernet 0x001cc916
+PHY mode: rgmii-id"><b>dwmac-stm32</b><br><small>stm32mp157 · RTL8211F</small></td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+starfive,jh7110-dwmac, snps,dwmac-5.20
+starfive,jh7110
+PHY: YT8531 Gigabit Ethernet 0x4f51e91b
+PHY mode: rgmii-id"><b>dwmac-starfive</b><br><small>jh7110 · YT8531</small></td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+compatible: not recorded
+starfive,jh7110
+PHY: YT8531S Gigabit Ethernet 0x4f51e91a
+PHY mode: gmii"><b>stmmac-pci + dwmac-motorcomm</b><br><small>jh7110 · YT8531S</small></td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="miss">-</td><td class="pad"></td></tr></tbody></table></div>
+<h3 id="g-stmmac-selftests-upstream">upstream <a class="anchor" href="#g-stmmac-selftests-upstream">permalink</a></h3>
+<p class="meta">no sweep of this tree yet</p>
+</details>
+<details class="grid" id="g-timestamping-cfg" open><summary>timestamping cfg</summary>
+<h3 id="g-timestamping-cfg-net-next">net-next <a class="anchor" href="#g-timestamping-cfg-net-next">permalink</a></h3>
+<p class="meta"><b>v7.3-rc1</b> &middot; <code>v7.3-rc1-364-g9eab111e7657</code> &middot; <code title="9eab111e765729e93087ff86a2ec9b2ae42d0fa5">9eab111e7657</code> &middot; interrupted</p>
+<div class="wrap"><table><thead><tr><th class="lbl"></th><th class="pad" style="min-width:13.0em"></th></tr></thead><tbody><tr><td class="lbl note" title="no run in this sweep
+amlogic,meson-g12a-dwmac, snps,dwmac-3.70a, snps,dwmac
+amlogic,sm1
+PHY: RTL8211F Gigabit Ethernet 0x001cc916
+PHY mode: rgmii-txid"><b>dwmac-meson8b</b><br><small>sm1 · RTL8211F</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+nxp,imx8mp-dwmac-eqos, snps,dwmac-5.10a
+fsl,imx8mp
+PHY: Microchip KSZ9131 Gigabit PHY 0x00221642
+PHY mode: rgmii-id"><b>dwmac-imx</b><br><small>imx8mp · KSZ9131</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+altr,socfpga-stmmac, snps,dwmac-3.70a, snps,dwmac
+altr,socfpga
+PHY: Micrel KSZ9031 Gigabit PHY 0x00221622
+PHY mode: rgmii"><b>dwmac-altr-socfpga</b><br><small>socfpga · KSZ9031</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+qcom,ipq806x-gmac, snps,dwmac
+qcom,ipq8064
+PHY: -
+PHY mode: -"><b>dwmac-ipq806x</b><br><small>ipq8064</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+allwinner,sun8i-h3-emac
+allwinner,sun8i-h2-plus
+PHY: Generic PHY 0x00441400
+PHY mode: mii"><b>dwmac-sun8i</b><br><small>sun8i-h2-plus · Generic PHY</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+st,stm32mp1-dwmac, snps,dwmac-4.20a
+st,stm32mp157
+PHY: RTL8211F Gigabit Ethernet 0x001cc916
+PHY mode: rgmii-id"><b>dwmac-stm32</b><br><small>stm32mp157 · RTL8211F</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+starfive,jh7110-dwmac, snps,dwmac-5.20
+starfive,jh7110
+PHY: YT8531 Gigabit Ethernet 0x4f51e91b
+PHY mode: rgmii-id"><b>dwmac-starfive</b><br><small>jh7110 · YT8531</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+compatible: not recorded
+starfive,jh7110
+PHY: YT8531S Gigabit Ethernet 0x4f51e91a
+PHY mode: gmii"><b>stmmac-pci + dwmac-motorcomm</b><br><small>jh7110 · YT8531S</small></td><td class="pad"></td></tr></tbody></table></div>
+<h3 id="g-timestamping-cfg-net">net <a class="anchor" href="#g-timestamping-cfg-net">permalink</a></h3>
+<p class="meta"><b>v7.3-rc1</b> &middot; <code>v7.3-rc1-271-g2b4707a149a5</code> &middot; <code title="2b4707a149a55e8fa75c9ef32b359d60f470a566">2b4707a149a5</code> &middot; interrupted</p>
+<div class="wrap"><table><thead><tr><th class="lbl"></th><th class="pad" style="min-width:13.0em"></th></tr></thead><tbody><tr><td class="lbl note" title="no run in this sweep
+amlogic,meson-g12a-dwmac, snps,dwmac-3.70a, snps,dwmac
+amlogic,sm1
+PHY: RTL8211F Gigabit Ethernet 0x001cc916
+PHY mode: rgmii-txid"><b>dwmac-meson8b</b><br><small>sm1 · RTL8211F</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+nxp,imx8mp-dwmac-eqos, snps,dwmac-5.10a
+fsl,imx8mp
+PHY: Microchip KSZ9131 Gigabit PHY 0x00221642
+PHY mode: rgmii-id"><b>dwmac-imx</b><br><small>imx8mp · KSZ9131</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+altr,socfpga-stmmac, snps,dwmac-3.70a, snps,dwmac
+altr,socfpga
+PHY: Micrel KSZ9031 Gigabit PHY 0x00221622
+PHY mode: rgmii"><b>dwmac-altr-socfpga</b><br><small>socfpga · KSZ9031</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+qcom,ipq806x-gmac, snps,dwmac
+qcom,ipq8064
+PHY: -
+PHY mode: -"><b>dwmac-ipq806x</b><br><small>ipq8064</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+allwinner,sun8i-h3-emac
+allwinner,sun8i-h2-plus
+PHY: Generic PHY 0x00441400
+PHY mode: mii"><b>dwmac-sun8i</b><br><small>sun8i-h2-plus · Generic PHY</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+st,stm32mp1-dwmac, snps,dwmac-4.20a
+st,stm32mp157
+PHY: RTL8211F Gigabit Ethernet 0x001cc916
+PHY mode: rgmii-id"><b>dwmac-stm32</b><br><small>stm32mp157 · RTL8211F</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+starfive,jh7110-dwmac, snps,dwmac-5.20
+starfive,jh7110
+PHY: YT8531 Gigabit Ethernet 0x4f51e91b
+PHY mode: rgmii-id"><b>dwmac-starfive</b><br><small>jh7110 · YT8531</small></td><td class="pad"></td></tr>
+<tr><td class="lbl note" title="no run in this sweep
+compatible: not recorded
+starfive,jh7110
+PHY: YT8531S Gigabit Ethernet 0x4f51e91a
+PHY mode: gmii"><b>stmmac-pci + dwmac-motorcomm</b><br><small>jh7110 · YT8531S</small></td><td class="pad"></td></tr></tbody></table></div>
+<h3 id="g-timestamping-cfg-upstream">upstream <a class="anchor" href="#g-timestamping-cfg-upstream">permalink</a></h3>
+<p class="meta">no sweep of this tree yet</p>
+</details>
+</body></html>
